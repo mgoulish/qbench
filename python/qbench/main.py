@@ -131,7 +131,20 @@ class Runner:
         run("rm qbench.log.*", shell=True)
 
         if get_file_size("qbench.log") == 0: # pragma: nocover
-            raise Exception("No data in logs")
+            warn("No data found in logs. May indicate connectivity failure. Returning zero results.")
+        return {
+            "duration": 0.0,
+            "operations": 0,
+            "latency": {"average": 0.0, "p50": 0.0, "p99": 0.0},
+            "session_outgoing_bytes": {"average": 0.0, "p50": 0, "p99": 0},
+            "sender_credit": {"average": 0.0, "p50": 0, "p99": 0},
+            "sender_queued": {"average": 0.0, "p50": 0, "p99": 0},
+            "sender_unsettled": {"average": 0.0, "p50": 0, "p99": 0},
+            "session_incoming_bytes": {"average": 0.0, "p50": 0, "p99": 0},
+            "receiver_credit": {"average": 0.0, "p50": 0, "p99": 0},
+            "receiver_queued": {"average": 0.0, "p50": 0, "p99": 0},
+            "receiver_unsettled": {"average": 0.0, "p50": 0, "p99": 0},
+        }
 
         data = _pandas.read_csv("qbench.log", header=None, dtype="int")
 
