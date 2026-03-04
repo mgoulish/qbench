@@ -130,7 +130,9 @@ class Runner:
         run("cat qbench.log.* > qbench.log", shell=True)
         run("rm qbench.log.*", shell=True)
 
-        if get_file_size("qbench.log") == 0: # pragma: nocover
+        # TEMP
+        #if get_file_size("qbench.log") == 0: # pragma: nocover
+        if True :   
             warn("No data found in logs. May indicate connectivity failure. Returning zero results.")
         return {
             "duration": 0.0,
